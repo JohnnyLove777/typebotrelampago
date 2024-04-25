@@ -2,11 +2,6 @@
 
 # Função para solicitar informações ao usuário e armazená-las em variáveis
 function solicitar_informacoes {
-    # Variáveis para armazenar os dados inseridos pelo usuário
-    local IP_VPS
-    local EMAIL_GMAIL
-    local SENHA_APP_GMAIL
-
     # Loop para solicitar e verificar o endereço IP da VPS
     while true; do
         read -p "Digite o endereço IP da VPS: " IP_VPS
@@ -46,7 +41,6 @@ function solicitar_informacoes {
     EMAIL_GMAIL_INPUT=$EMAIL_GMAIL
     SENHA_APP_GMAIL_INPUT=$SENHA_APP_GMAIL
 }
-
 
 # Função para instalar o Typebot de acordo com os comandos fornecidos
 function instalar_typebot {
