@@ -2,9 +2,44 @@
 
 # Função para solicitar informações ao usuário e armazená-las em variáveis
 function solicitar_informacoes {
-    read -p "Digite o endereço IP da VPS: " IP_VPS
-    read -p "Digite o e-mail do Gmail para cadastro do Typebot: " EMAIL_GMAIL
-    read -p "Digite a senha de app do Gmail (sem espaços): " SENHA_APP_GMAIL
+    # Variáveis para armazenar os dados inseridos pelo usuário
+    local IP_VPS
+    local EMAIL_GMAIL
+    local SENHA_APP_GMAIL
+
+    # Loop para solicitar e verificar o endereço IP da VPS
+    while true; do
+        read -p "Digite o endereço IP da VPS: " IP_VPS
+        # Verifica se o formato do endereço IP é válido
+        if [[ $IP_VPS =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            break
+        else
+            echo "Por favor, insira um endereço IP válido."
+        fi
+    done
+
+    # Loop para solicitar e verificar o e-mail do Gmail
+    while true; do
+        read -p "Digite o e-mail do Gmail para cadastro do Typebot: " EMAIL_GMAIL
+        # Verifica se o e-mail tem o formato correto
+        if [[ $EMAIL_GMAIL =~ ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ]]; then
+            break
+        else
+            echo "Por favor, insira um endereço de e-mail válido."
+        fi
+    done
+
+    # Loop para solicitar e verificar a senha de app do Gmail
+    while true; do
+        read -s -p "Digite a senha de app do Gmail (sem espaços, exatamente 16 caracteres): " SENHA_APP_GMAIL
+        echo
+        # Verifica se a senha não contém espaços e tem exatamente 16 caracteres
+        if [[ ! $SENHA_APP_GMAIL =~ [[:space:]] && ${#SENHA_APP_GMAIL} -eq 16 ]]; then
+            break
+        else
+            echo "A senha de app deve ter exatamente 16 caracteres e não pode conter espaços."
+        fi
+    done
 }
 
 # Função para instalar o Typebot de acordo com os comandos fornecidos
