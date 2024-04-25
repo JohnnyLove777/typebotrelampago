@@ -21,25 +21,30 @@ function solicitar_informacoes {
     # Loop para solicitar e verificar o e-mail do Gmail
     while true; do
         read -p "Digite o e-mail do Gmail para cadastro do Typebot: " EMAIL_GMAIL
-        # Verifica se o e-mail tem o formato correto
-        if [[ $EMAIL_GMAIL =~ ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ]]; then
+        # Verifica se o e-mail tem o formato correto e não contém espaços
+        if [[ $EMAIL_GMAIL =~ ^[^\s]+@[^\s]+$ ]]; then
             break
         else
-            echo "Por favor, insira um endereço de e-mail válido."
+            echo "Por favor, insira um endereço de e-mail válido sem espaços."
         fi
     done
 
     # Loop para solicitar e verificar a senha de app do Gmail
     while true; do
-        read -s -p "Digite a senha de app do Gmail (sem espaços, exatamente 16 caracteres): " SENHA_APP_GMAIL
+        read -s -p "Digite a senha de app do Gmail (exatamente 16 caracteres): " SENHA_APP_GMAIL
         echo
-        # Verifica se a senha não contém espaços e tem exatamente 16 caracteres
-        if [[ ! $SENHA_APP_GMAIL =~ [[:space:]] && ${#SENHA_APP_GMAIL} -eq 16 ]]; then
+        # Verifica se a senha tem exatamente 16 caracteres
+        if [[ ${#SENHA_APP_GMAIL} -eq 16 ]]; then
             break
         else
-            echo "A senha de app deve ter exatamente 16 caracteres e não pode conter espaços."
+            echo "A senha de app deve ter exatamente 16 caracteres."
         fi
     done
+
+    # Atribuição das variáveis com os valores fornecidos pelo usuário
+    IP_VPS="$IP_VPS"
+    EMAIL_GMAIL="$EMAIL_GMAIL"
+    SENHA_APP_GMAIL="$SENHA_APP_GMAIL"
 }
 
 # Função para instalar o Typebot de acordo com os comandos fornecidos
