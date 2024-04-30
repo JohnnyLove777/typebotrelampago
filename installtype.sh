@@ -151,7 +151,7 @@ volumes:
 EOF
 
     # Inicia os contêineres
-    docker-compose up -d
+    docker compose up -d
     cd ..
 
     echo "Typebot instalado e configurado com sucesso!"
